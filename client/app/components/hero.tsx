@@ -7,6 +7,23 @@ import NeonCrystalCity from './hero2';
 const VPSNeonCity: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeSection, setActiveSection] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  // Generate random positions only on client side
+  const [floatingElements] = useState(() => 
+    Array.from({ length: 15 }, () => ({
+      startX: Math.random() * 100,
+      endX: Math.random() * 100,
+      startY: Math.random() * 100,
+      endY: Math.random() * 100,
+      delay: Math.random() * 3,
+      duration: 5 + Math.random() * 5,
+    }))
+  );
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -146,31 +163,33 @@ const VPSNeonCity: React.FC = () => {
             </motion.div>
 
             {/* Floating elements */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-              {[...Array(15)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute"
-                  animate={{
-                    x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
-                    y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
-                    scale: [0, 1, 0],
-                    opacity: [0, 0.6, 0],
-                  }}
-                  transition={{
-                    duration: 5 + Math.random() * 5,
-                    repeat: Infinity,
-                    delay: Math.random() * 3,
-                  }}
-                  style={{
-                    left: Math.random() * 100 + '%',
-                    top: Math.random() * 100 + '%',
-                  }}
-                >
-                  <div className="w-1 h-1 bg-cyan-400 rounded-full" />
-                </motion.div>
-              ))}
-            </div>
+            {mounted && (
+              <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                {floatingElements.map((element, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute"
+                    animate={{
+                      x: [`${element.startX}%`, `${element.endX}%`],
+                      y: [`${element.startY}%`, `${element.endY}%`],
+                      scale: [0, 1, 0],
+                      opacity: [0, 0.6, 0],
+                    }}
+                    transition={{
+                      duration: element.duration,
+                      repeat: Infinity,
+                      delay: element.delay,
+                    }}
+                    style={{
+                      left: `${element.startX}%`,
+                      top: `${element.startY}%`,
+                    }}
+                  >
+                    <div className="w-1 h-1 bg-cyan-400 rounded-full" />
+                  </motion.div>
+                ))}
+              </div>
+            )}
 
             {/* Scroll hint */}
             <motion.div

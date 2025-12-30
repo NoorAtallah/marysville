@@ -1,10 +1,12 @@
 import Image from "next/image";
-import VPSIsometricCity from "./components/hero";
-import VPSHeroScattered from "./components/hero2";
+import MarysvilleVPS  from './components/hero'
+
+
 export default function Home() {
   return (
     <div>
-      <VPSIsometricCity />
+      <MarysvilleVPS />
+      {/* <VPSIsometricCity /> */}
       {/* <VPSHeroScattered /> */}
     </div>
   );

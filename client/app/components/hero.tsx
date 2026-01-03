@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight, Check, Server, Shield, Zap, Globe, Clock, Headphones, MapPin, HardDrive, Cpu, Database, Menu, X } from 'lucide-react';
 
@@ -379,21 +380,25 @@ export default function MarysvilleVPS() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <motion.button 
-                    className="group flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full text-white font-medium text-sm md:text-base"
-                    style={{ backgroundColor: colors.purple }}
-                    whileHover={{ scale: 1.02, boxShadow: `0 20px 40px ${colors.purple}30` }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Get Started — $10/mo
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </motion.button>
-                  <motion.button 
-                    className="px-6 py-3 md:px-8 md:py-4 rounded-full font-medium border-2 border-gray-200 text-gray-600 hover:border-gray-300 text-sm md:text-base"
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    View Plans
-                  </motion.button>
+                  <Link href="/pricing">
+                    <motion.button 
+                      className="group flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full text-white font-medium text-sm md:text-base w-full sm:w-auto"
+                      style={{ backgroundColor: colors.purple }}
+                      whileHover={{ scale: 1.02, boxShadow: `0 20px 40px ${colors.purple}30` }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      Get Started — $10/mo
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </motion.button>
+                  </Link>
+                  <Link href="/pricing">
+                    <motion.button 
+                      className="px-6 py-3 md:px-8 md:py-4 rounded-full font-medium border-2 border-gray-200 text-gray-600 hover:border-gray-300 text-sm md:text-base w-full sm:w-auto"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      View Plans
+                    </motion.button>
+                  </Link>
                 </motion.div>
 
                 <motion.div 
@@ -869,11 +874,13 @@ export default function MarysvilleVPS() {
                       <div className="space-y-1.5 md:space-y-2 mb-4">
                         {plan.features.map(f => <div key={f} className="flex items-center gap-2 text-xs md:text-sm text-gray-600"><Check className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 text-green-500" />{f}</div>)}
                       </div>
-                      <motion.button 
-                        className={`w-full py-2.5 md:py-3 rounded-full font-medium text-sm md:text-base ${plan.popular ? 'text-white' : 'border-2 border-gray-200 text-gray-600'}`}
-                        style={{ backgroundColor: plan.popular ? colors.purple : undefined }}
-                        whileHover={{ scale: 1.02 }}
-                      >Get Started</motion.button>
+                      <Link href="/pricing">
+                        <motion.button 
+                          className={`w-full py-2.5 md:py-3 rounded-full font-medium text-sm md:text-base ${plan.popular ? 'text-white' : 'border-2 border-gray-200 text-gray-600'}`}
+                          style={{ backgroundColor: plan.popular ? colors.purple : undefined }}
+                          whileHover={{ scale: 1.02 }}
+                        >Get Started</motion.button>
+                      </Link>
                     </motion.div>
                   ))}
                 </div>
@@ -979,17 +986,19 @@ export default function MarysvilleVPS() {
               </motion.div>
 
               {/* CTA */}
-              <motion.button 
-                className="mt-8 md:mt-10 group flex items-center gap-2 md:gap-3 text-xs md:text-sm tracking-wide"
-                style={{ color: colors.navy }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                whileHover={{ gap: '16px' }}
-              >
-                <span className="uppercase tracking-[0.15em] md:tracking-[0.2em]">Explore Program</span>
-                <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
-              </motion.button>
+              <Link href="https://flowspanish.com" target="_blank" rel="noopener noreferrer">
+                <motion.button 
+                  className="mt-8 md:mt-10 group flex items-center gap-2 md:gap-3 text-xs md:text-sm tracking-wide"
+                  style={{ color: colors.navy }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                  whileHover={{ gap: '16px' }}
+                >
+                  <span className="uppercase tracking-[0.15em] md:tracking-[0.2em]">Explore Program</span>
+                  <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
+                </motion.button>
+              </Link>
 
               {/* Bottom levels - minimal */}
               <motion.div 
@@ -1033,10 +1042,14 @@ export default function MarysvilleVPS() {
               </motion.p>
 
               <motion.div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto px-4 sm:px-0" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-                <motion.button className="group flex items-center justify-center gap-2 px-8 py-4 md:px-10 md:py-5 rounded-full bg-white font-medium text-sm md:text-base" style={{ color: colors.navy }} whileHover={{ scale: 1.02 }}>
-                  Start Free Trial<ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </motion.button>
-                <motion.button className="px-8 py-4 md:px-10 md:py-5 rounded-full font-medium text-white border-2 border-white/20 hover:bg-white/10 text-sm md:text-base" whileHover={{ scale: 1.02 }}>Contact Sales</motion.button>
+                <Link href="/pricing">
+                  <motion.button className="group flex items-center justify-center gap-2 px-8 py-4 md:px-10 md:py-5 rounded-full bg-white font-medium text-sm md:text-base w-full sm:w-auto" style={{ color: colors.navy }} whileHover={{ scale: 1.02 }}>
+                    Start Free Trial<ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </motion.button>
+                </Link>
+                <Link href="/contact">
+                  <motion.button className="px-8 py-4 md:px-10 md:py-5 rounded-full font-medium text-white border-2 border-white/20 hover:bg-white/10 text-sm md:text-base w-full sm:w-auto" whileHover={{ scale: 1.02 }}>Contact Sales</motion.button>
+                </Link>
               </motion.div>
 
               <motion.div className="absolute bottom-16 md:bottom-8 flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-white/30 text-xs md:text-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>

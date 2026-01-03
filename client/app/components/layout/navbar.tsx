@@ -91,7 +91,7 @@ export function Navbar() {
             {/* CTA Button */}
             <div className="hidden md:flex items-center gap-4">
               <Link
-                href="#get-started"
+                href="/pricing"
                 className="px-5 py-2 md:px-6 md:py-2.5 text-white rounded-full font-semibold text-sm hover:shadow-lg transition-all duration-300 hover:scale-105"
                 style={{ 
                   background: `linear-gradient(135deg, ${colors.purple}, ${colors.violet})`,

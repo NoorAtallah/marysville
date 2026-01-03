@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
+import Link from 'next/link';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { 
   ArrowRight, 
@@ -293,21 +294,25 @@ export default function ServicesPage() {
             animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3 }}
           >
-            <motion.button
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold"
-              style={{ backgroundColor: colors.purple }}
-              whileHover={{ scale: 1.05, boxShadow: `0 20px 50px ${colors.purple}40` }}
-            >
-              Explore Services
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </motion.button>
-            <motion.button
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold border-2"
-              style={{ borderColor: colors.navy, color: colors.navy }}
-              whileHover={{ scale: 1.05, backgroundColor: `${colors.navy}08` }}
-            >
-              View Pricing
-            </motion.button>
+            <Link href="/services">
+              <motion.button
+                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold w-full sm:w-auto"
+                style={{ backgroundColor: colors.purple }}
+                whileHover={{ scale: 1.05, boxShadow: `0 20px 50px ${colors.purple}40` }}
+              >
+                Explore Services
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </motion.button>
+            </Link>
+            <Link href="/pricing">
+              <motion.button
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold border-2 w-full sm:w-auto"
+                style={{ borderColor: colors.navy, color: colors.navy }}
+                whileHover={{ scale: 1.05, backgroundColor: `${colors.navy}08` }}
+              >
+                View Pricing
+              </motion.button>
+            </Link>
           </motion.div>
 
           {/* Trust Badges */}
@@ -350,56 +355,81 @@ export default function ServicesPage() {
       <HorizontalScrollSection />
 
       {/* ==================== STATS ==================== */}
-      <section className="relative py-24 md:py-32">
-        <div 
-          className="absolute inset-0"
-          style={{ background: `linear-gradient(135deg, ${colors.navy} 0%, ${colors.purple} 100%)` }}
-        />
-        <div className="absolute inset-0 opacity-10">
+      <section className="relative py-24 md:py-32 overflow-hidden">
+        {/* Minimal background decoration */}
+        <div className="absolute inset-0 opacity-[0.02]">
           <div 
+            className="absolute inset-0"
             style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-              backgroundSize: '32px 32px',
-              width: '100%',
-              height: '100%'
+              backgroundImage: `linear-gradient(${colors.navy} 1px, transparent 1px), linear-gradient(90deg, ${colors.navy} 1px, transparent 1px)`,
+              backgroundSize: '100px 100px',
             }}
           />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
+        <div className="relative max-w-7xl mx-auto px-4 md:px-8">
+          {/* Header */}
           <motion.div
-            className="text-center mb-16"
+            className="max-w-2xl mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <span className="text-sm font-medium tracking-widest uppercase text-white/60">Why Choose Us</span>
-            <h2 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold text-white">Trusted by Thousands</h2>
-            <p className="mt-4 text-lg text-white/50">The numbers speak for themselves</p>
+            <h2 
+              className="text-3xl md:text-4xl lg:text-5xl font-bold"
+              style={{ color: colors.navy }}
+            >
+              Why choose{' '}
+              <span 
+                className="bg-clip-text text-transparent"
+                style={{ backgroundImage: `linear-gradient(135deg, ${colors.purple}, ${colors.lightBlue})` }}
+              >
+                MARYSVILLE
+              </span>
+            </h2>
           </motion.div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                className="text-center"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div 
-                  className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4"
-                  style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
+          {/* Stats Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+            {stats.map((stat, index) => {
+              const Icon = stat.icon;
+              return (
+                <motion.div
+                  key={stat.label}
+                  className="group"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
                 >
-                  <stat.icon className="w-7 h-7 text-white/80" />
-                </div>
-                <p className="text-4xl md:text-5xl font-bold mb-2" style={{ color: colors.lightBlue }}>
-                  {stat.value}
-                </p>
-                <p className="text-sm text-white/50">{stat.label}</p>
-              </motion.div>
-            ))}
+                  {/* Icon */}
+                  <div className="mb-4 opacity-40 group-hover:opacity-60 transition-opacity">
+                    <Icon className="w-7 h-7" style={{ color: colors.purple }} />
+                  </div>
+
+                  {/* Value */}
+                  <div className="mb-2">
+                    <span 
+                      className="text-4xl md:text-5xl font-bold"
+                      style={{ color: colors.navy }}
+                    >
+                      {stat.value}
+                    </span>
+                  </div>
+
+                  {/* Label */}
+                  <p className="text-sm text-gray-500">
+                    {stat.label}
+                  </p>
+
+                  {/* Minimal accent line on hover */}
+                  <motion.div 
+                    className="mt-4 h-px w-0 group-hover:w-12 transition-all duration-300"
+                    style={{ backgroundColor: colors.purple }}
+                  />
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -433,19 +463,23 @@ export default function ServicesPage() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <button
-              className="group w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-5 rounded-full font-semibold text-lg text-white"
-              style={{ backgroundColor: colors.purple }}
-            >
-              View Pricing Plans
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button
-              className="w-full sm:w-auto px-10 py-5 rounded-full font-semibold text-lg border-2"
-              style={{ borderColor: colors.navy, color: colors.navy }}
-            >
-              Contact Sales
-            </button>
+            <Link href="/pricing">
+              <button
+                className="group w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-5 rounded-full font-semibold text-lg text-white"
+                style={{ backgroundColor: colors.purple }}
+              >
+                View Pricing Plans
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
+            <Link href="/about">
+              <button
+                className="w-full sm:w-auto px-10 py-5 rounded-full font-semibold text-lg border-2"
+                style={{ borderColor: colors.navy, color: colors.navy }}
+              >
+                Contact Sales
+              </button>
+            </Link>
           </motion.div>
         </div>
       </section>

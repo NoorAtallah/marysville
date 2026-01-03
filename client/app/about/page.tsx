@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
+import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { 
   Zap, 
@@ -87,17 +88,19 @@ export default function AboutPage() {
                 We built the hosting platform we wish existed. Fast, secure, and refreshingly simple.
               </motion.p>
 
-              <motion.button
-                className="mt-8 group inline-flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold"
-                style={{ backgroundColor: colors.purple }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.2 }}
-                whileHover={{ scale: 1.05, boxShadow: `0 20px 50px ${colors.purple}40` }}
-              >
-                Start Building
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+              <Link href="/pricing">
+                <motion.button
+                  className="mt-8 group inline-flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold"
+                  style={{ backgroundColor: colors.purple }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.2 }}
+                  whileHover={{ scale: 1.05, boxShadow: `0 20px 50px ${colors.purple}40` }}
+                >
+                  Start Building
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </motion.button>
+              </Link>
 
               {/* Stats */}
               <motion.div
@@ -591,21 +594,25 @@ export default function AboutPage() {
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <motion.button
-                className="group w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-full text-white font-semibold"
-                style={{ backgroundColor: colors.purple }}
-                whileHover={{ scale: 1.05, boxShadow: `0 20px 50px ${colors.purple}40` }}
-              >
-                Start Free Trial
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
-              <motion.button
-                className="w-full sm:w-auto px-8 py-4 rounded-full font-semibold border-2"
-                style={{ borderColor: colors.navy, color: colors.navy }}
-                whileHover={{ scale: 1.05, backgroundColor: `${colors.navy}08` }}
-              >
-                View Pricing
-              </motion.button>
+              <Link href="/pricing">
+                <motion.button
+                  className="group w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-full text-white font-semibold"
+                  style={{ backgroundColor: colors.purple }}
+                  whileHover={{ scale: 1.05, boxShadow: `0 20px 50px ${colors.purple}40` }}
+                >
+                  Start Free Trial
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </motion.button>
+              </Link>
+              <Link href="/pricing">
+                <motion.button
+                  className="w-full sm:w-auto px-8 py-4 rounded-full font-semibold border-2"
+                  style={{ borderColor: colors.navy, color: colors.navy }}
+                  whileHover={{ scale: 1.05, backgroundColor: `${colors.navy}08` }}
+                >
+                  View Pricing
+                </motion.button>
+              </Link>
             </div>
 
             <p className="mt-6 text-sm text-gray-400">

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Check, 
@@ -618,23 +619,27 @@ export default function PricingPage() {
               <p className="mt-4 text-white/70 max-w-xl mx-auto">
                 Contact our sales team for a tailored plan that fits your specific requirements
               </p>
-              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <motion.button
-                  className="group w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white font-semibold"
-                  style={{ color: colors.navy }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Contact Sales
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </motion.button>
-                <motion.button
-                  className="w-full sm:w-auto px-8 py-4 rounded-full font-semibold text-white border-2 border-white/30 hover:bg-white/10"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  View All Plans
-                </motion.button>
+              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 ">
+                <Link href="/contact">
+                  <motion.button
+                    className="group w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white font-semibold cursor-pointer"
+                    style={{ color: colors.navy }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Contact Sales
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </motion.button>
+                </Link>
+                <Link href="/about">
+                  <motion.button
+                    className="w-full sm:w-auto px-8 py-4 rounded-full font-semibold text-white border-2 border-white/30 hover:bg-white/10  cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Learn More
+                  </motion.button>
+                </Link>
               </div>
             </div>
           </motion.div>
@@ -701,22 +706,24 @@ function PricingCard({ plan, index }: { plan: any; index: number }) {
       </ul>
 
       {/* CTA Button */}
-      <motion.button
-        className={`w-full py-3 rounded-full font-semibold transition-all ${
-          plan.popular 
-            ? 'text-white' 
-            : 'border-2 hover:bg-gray-50'
-        }`}
-        style={{ 
-          backgroundColor: plan.popular ? colors.purple : 'transparent',
-          borderColor: plan.popular ? undefined : colors.navy,
-          color: plan.popular ? 'white' : colors.navy,
-        }}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        Get Started
-      </motion.button>
+      <Link href="/contact">
+        <motion.button
+          className={`w-full py-3 rounded-full font-semibold transition-all cursor-pointer ${
+            plan.popular 
+              ? 'text-white' 
+              : 'border-2 hover:bg-gray-50'
+          }`}
+          style={{ 
+            backgroundColor: plan.popular ? colors.purple : 'transparent',
+            borderColor: plan.popular ? undefined : colors.navy,
+            color: plan.popular ? 'white' : colors.navy,
+          }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          Get Started
+        </motion.button>
+      </Link>
     </motion.div>
   );
 }
